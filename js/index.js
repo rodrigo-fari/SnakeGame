@@ -54,7 +54,7 @@ const drawFood = () => {
 }
 
 const drawSnake = () => {
-	ctx.fillStyle = color
+	ctx.fillStyle = +score.innerText >= 5 && +score.innerText <= 10 ? randomColor() : color
 	snake.forEach((position, index) => {
 		if (index == snake.length - 1) {
 			ctx.fillStyle = "white"
@@ -144,8 +144,7 @@ const gameOver = () => {
 }
 
 const gameLoop = () => {
-	if (isGameOver) return; // Interrompe o loop se o jogo terminou
-
+	if (isGameOver) return;
 	clearInterval(loopId)
 	ctx.clearRect(0, 0, 600, 600)
 	drawGrid()
@@ -181,5 +180,6 @@ buttonPlay.addEventListener('click', () => {
 	scoreLabel.style.filter = "none"
 	snake = [{ ...initialPosition, color: randomColor() }];
 	direction = undefined;
-	isGameOver = false; // Redefine o estado do jogo como "ativo"
+	isGameOver = false;
+	location.reload()
 })
